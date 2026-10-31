@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="id"><head>
+<html lang="id">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftar Nilai - SMKN 1 GONDANG</title>
@@ -202,30 +203,35 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
     <div>
       <label>Mata Pelajaran:</label>
       <div class="mapel-wrapper">
-        <select id="mapel" onchange="onMapelManualChange()"><option value="1">Informatika</option><option value="2">Pendidikan Agama Islam</option><option value="3" selected="">Produk Kreatif dan Kewirausahaan</option></select>
+        <select id="mapel" onchange="onMapelManualChange()"></select>
         <button class="btn-manage-mapel no-print" onclick="openMapelManager()">️ Kelola</button>
       </div>
     </div>
     <div>
       <label>KKTP:</label>
-      <select id="kktp" onchange="onKktpManualChange()"><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75" selected="">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option></select>
+      <select id="kktp" onchange="onKktpManualChange()">
+        <option value="70">70</option><option value="71">71</option><option value="72">72</option>
+        <option value="73">73</option><option value="74">74</option><option value="75" selected>75</option>
+        <option value="76">76</option><option value="77">77</option><option value="78">78</option>
+        <option value="79">79</option><option value="80">80</option>
+      </select>
     </div>
-    <div><label>Guru Pengampu:</label><input type="text" id="guru" value="Suhardi, S.Pd." oninput="autoSave()"></div>
+    <div><label>Guru Pengampu:</label><input type="text" id="guru" value="[Nama Anda, S.Pd.]" oninput="autoSave()"></div>
   </div>
 
   <div class="unified-toolbar-wrapper no-print">
     <div class="unified-menu-dropdown">
-      <button class="btn-menu-toggle" onclick="toggleUnifiedMenu(event)">☰ Menu Utama &amp; Kelola ▾</button>
+      <button class="btn-menu-toggle" onclick="toggleUnifiedMenu(event)">☰ Menu Utama & Kelola ▾</button>
       <div class="menu-dropdown-content" id="unifiedMenuDropdown">
         <div class="menu-group">
-          <div class="menu-group-title">📐 Struktur &amp; Kelas</div>
-          <button class="menu-item" id="btnManageSiswa" onclick="openSiswaManager();closeUnifiedMenu();">👥 Kelola Jumlah Siswa (aktif: 36)</button>
-          <button class="menu-item" id="btnManageUh" onclick="openStrukturManager('uh');closeUnifiedMenu();">📝 Kelola Ulangan Harian (3)</button>
-          <button class="menu-item" id="btnManageTugas" onclick="openStrukturManager('tugas');closeUnifiedMenu();">📋 Kelola Tugas (2)</button>
-          <button class="menu-item" onclick="openClassManager();closeUnifiedMenu();">🏫 Kelola Kelas &amp; Mapel</button>
+          <div class="menu-group-title">📐 Struktur & Kelas</div>
+          <button class="menu-item" id="btnManageSiswa" onclick="openSiswaManager();closeUnifiedMenu();">👥 Kelola Jumlah Siswa</button>
+          <button class="menu-item" id="btnManageUh" onclick="openStrukturManager('uh');closeUnifiedMenu();">📝 Kelola Ulangan Harian</button>
+          <button class="menu-item" id="btnManageTugas" onclick="openStrukturManager('tugas');closeUnifiedMenu();">📋 Kelola Tugas</button>
+          <button class="menu-item" onclick="openClassManager();closeUnifiedMenu();">🏫 Kelola Kelas & Mapel</button>
         </div>
         <div class="menu-group">
-          <div class="menu-group-title">📊 Import &amp; Export Excel</div>
+          <div class="menu-group-title">📊 Import & Export Excel</div>
           <button class="menu-item" onclick="downloadTemplate();closeUnifiedMenu();">📋 Template (Kelas Ini)</button>
           <button class="menu-item" onclick="downloadTemplateAll();closeUnifiedMenu();">📋 Template (Semua Kelas)</button>
           <button class="menu-item" onclick="document.getElementById('excelFile').click();closeUnifiedMenu();">📥 Import Excel (Kelas Ini)</button>
@@ -234,7 +240,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
           <button class="menu-item" onclick="openExportModal();closeUnifiedMenu();">💾 Export Pilihan Kelas</button>
         </div>
         <div class="menu-group">
-          <div class="menu-group-title">🖨️ Cetak &amp; Cadangan Data</div>
+          <div class="menu-group-title">🖨️ Cetak & Cadangan Data</div>
           <button class="menu-item" onclick="printCurrentClass();closeUnifiedMenu();">🖨️ Cetak Kelas Ini</button>
           <button class="menu-item" onclick="openPrintModal();closeUnifiedMenu();">🖨️ Cetak Pilihan Kelas</button>
           <button class="menu-item" onclick="printAllClasses();closeUnifiedMenu();">🖨️ Cetak Semua Kelas</button>
@@ -246,19 +252,20 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
           <div class="menu-group-title">🌐 Google Spreadsheet &amp; File</div>
           <button class="menu-item" onclick="openGasModal();closeUnifiedMenu();">🔗 Koneksi Google Spreadsheet</button>
           <button class="menu-item" onclick="testGasConnection();closeUnifiedMenu();">🧪 Test Spreadsheet</button>
+          <button class="menu-item" onclick="syncAllClassesToGas();closeUnifiedMenu();">🔄 Sinkronkan Semua Kelas</button>
           <button class="menu-item" onclick="openPersistModal();closeUnifiedMenu();">📦 Simpan &amp; Unduh HTML</button>
         </div>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:12px;font-size:12px;">
       <span class="save-status" id="saveStatus">✓ Tersimpan</span>
-      <span class="sync-status" id="syncStatus" style="font-size:11px;color:#2980b9;font-style:italic">🌐 Sync: Ready</span>
+      <span class="sync-status" id="syncStatus" style="font-size:11px;color:#2980b9;font-style:italic;cursor:pointer;" title="Klik untuk mencoba sinkronisasi sekarang" onclick="manualTriggerSync()">🌐 Sync: Ready</span>
     </div>
   </div>
   <input type="file" id="excelFileAll" style="display:none" accept=".xlsx,.xls" onchange="importExcelAll(event)">
 
   <div class="tabs no-print" id="tabs"></div>
-  <div class="class-print-title print-only">Kelas: <span id="printClassName">XI DKV 3</span></div>
+  <div class="class-print-title print-only">Kelas: <span id="printClassName"></span></div>
   <div id="class-content"></div>
 
   <input type="file" id="restoreFile" style="display:none" accept=".json" onchange="restoreData(event)">
@@ -272,21 +279,21 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
   <div class="selection-toolbar">
     <button onclick="toggleAllPrint(true)">✓ Pilih Semua</button>
     <button onclick="toggleAllPrint(false)">✗ Batal Semua</button>
-    <span class="counter" id="printCounter"></span>
+    <span class="counter" id="printCounter">0 kelas dipilih</span>
   </div>
   <div class="selection-list" id="printClassList"></div>
   <div class="print-options">
     <div class="print-option-box">
       <label>Orientasi Kertas</label>
       <select id="printOrientation">
-        <option value="landscape" selected="">Landscape (mendatar)</option>
+        <option value="landscape" selected>Landscape (mendatar)</option>
         <option value="portrait">Portrait (tegak)</option>
       </select>
     </div>
     <div class="print-option-box">
       <label>Ukuran Kertas</label>
       <select id="printPaperSize">
-        <option value="A4" selected="">A4</option>
+        <option value="A4" selected>A4</option>
         <option value="F4">F4 / Folio</option>
         <option value="A3">A3</option>
         <option value="Letter">Letter</option>
@@ -294,7 +301,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
     </div>
   </div>
   <label class="print-toggle">
-    <input type="checkbox" id="printShowEmpty" checked="">
+    <input type="checkbox" id="printShowEmpty" checked>
     Sertakan baris siswa yang belum bernama
   </label>
   <div class="selection-summary" id="printSummary"></div>
@@ -311,11 +318,11 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
   <div class="selection-toolbar">
     <button onclick="toggleAllExport(true)">✓ Pilih Semua</button>
     <button onclick="toggleAllExport(false)"> Batal Semua</button>
-    <span class="counter export-counter" id="exportCounter"></span>
+    <span class="counter export-counter" id="exportCounter">0 kelas dipilih</span>
   </div>
   <div class="selection-list" id="exportClassList"></div>
   <div class="export-mode">
-    <label><input type="radio" name="exportMode" value="sheet" checked="">
+    <label><input type="radio" name="exportMode" value="sheet" checked>
       <span><strong>Pisah per Sheet</strong><br>Setiap kelas = 1 sheet terpisah.</span></label>
     <label><input type="radio" name="exportMode" value="combined">
       <span><strong>Gabung 1 Sheet</strong><br>Semua kelas dalam 1 sheet.</span></label>
@@ -346,7 +353,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
 <div class="modal-overlay" id="strukturModal"><div class="modal">
   <h3 id="strukturTitle" style="color:#8e44ad">📝 Kelola Ulangan Harian</h3>
   <p>Tambah, edit, atau hapus jenis penilaian.</p>
-  <div class="item-count-info" id="strukturCountInfo"></div>
+  <div class="item-count-info" id="strukturCountInfo">Total: 0</div>
   <div class="item-list" id="strukturList"></div>
   <div class="add-item-form">
     <input type="text" id="newStrukturName" placeholder="Nama penilaian baru..." maxlength="30" onkeydown="if(event.key==='Enter')addStruktur()">
@@ -359,7 +366,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
 <div class="modal-overlay" id="classModal"><div class="modal">
   <h3>🏫 Kelola Kelas, Mapel, KKTP &amp; Wali Kelas</h3>
   <p>Setiap kelas memiliki <strong>mapel default</strong>, <strong>KKTP</strong>, <strong>Wali Kelas</strong>, dan <strong>jumlah siswa</strong> sendiri.</p>
-  <div class="item-count-info" id="classCountInfo"></div>
+  <div class="item-count-info" id="classCountInfo">Total kelas: 0</div>
   <div class="item-list" id="classList"></div>
   <div class="add-item-form" style="flex-wrap:wrap">
     <input type="text" id="newClassName" placeholder="Nama kelas baru..." maxlength="50" style="flex:1;min-width:140px" onkeydown="if(event.key==='Enter')addClass()">
@@ -389,7 +396,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
   <div class="modal-field"><label for="newKktp">KKTP Baru:</label>
     <select id="newKktp">
       <option value="70">70</option><option value="71">71</option><option value="72">72</option>
-      <option value="73">73</option><option value="74">74</option><option value="75" selected="">75</option>
+      <option value="73">73</option><option value="74">74</option><option value="75" selected>75</option>
       <option value="76">76</option><option value="77">77</option><option value="78">78</option>
       <option value="79">79</option><option value="80">80</option>
     </select>
@@ -418,7 +425,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
   <h3>📦 Simpan Permanen ke HTML</h3>
   <p>Membuat <strong>salinan HTML baru</strong> yang berisi data saat ini.</p>
   <div class="persist-options">
-    <label><input type="radio" name="persistMode" value="full" checked="">
+    <label><input type="radio" name="persistMode" value="full" checked>
       <span><strong>Salinan Lengkap</strong><br>Nama siswa dan seluruh nilai ikut terbawa.</span></label>
     <label><input type="radio" name="persistMode" value="fresh">
       <span><strong>Tampilan Awal (Kosong)</strong><br>Struktur tetap, nama siswa dan nilai dikosongkan.</span></label>
@@ -447,7 +454,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
       <li>Klik menu <strong>Ekstensi</strong> &gt; <strong>Apps Script</strong>.</li>
       <li>Hapus kode bawaan di editor, lalu tempelkan (paste) kode Apps Script di bawah.</li>
     </ol>
-    <textarea id="gasCodeBox" readonly="" style="width:100%;height:100px;font-family:monospace;font-size:10px;margin-top:6px;padding:6px;border:1px solid #ccc;border-radius:3px;background:#fff;resize:vertical;"></textarea>
+    <textarea id="gasCodeBox" readonly style="width:100%;height:100px;font-family:monospace;font-size:10px;margin-top:6px;padding:6px;border:1px solid #ccc;border-radius:3px;background:#fff;resize:vertical;"></textarea>
     <button style="margin-top:6px;padding:4px 10px;font-size:11px;background:#34495e;color:#fff;" onclick="copyGasCode()">📋 Salin Kode Apps Script</button>
     <ol start="4" style="font-size:11px;line-height:1.7;margin-left:18px;margin-top:8px;color:#444;">
       <li>Klik tombol <strong>Deploy</strong> (Terapkan) &gt; <strong>Web app baru</strong>.</li>
@@ -463,7 +470,7 @@ th{background:#eee!important;-webkit-print-color-adjust:exact}
   </div>
 </div></div>
 
-<script id="baked-data" type="application/json">{"buildId":"mvudm7hg-jjf9o","bakedAt":"2026-10-30T02:51:58.967Z","mode":"full","payload":{"version":7,"mapel":"3","kktp":"75","guru":"Suhardi, S.Pd.","semester":"Semester Gasal","tahun":"2026/2027","gasUrl":"","currentClass":0,"mapelList":[{"id":1,"name":"Informatika"},{"id":2,"name":"Pendidikan Agama Islam"},{"id":3,"name":"Produk Kreatif dan Kewirausahaan"}],"uhList":["UH 1","UH 2","UH 3"],"tugasList":["Tugas 1","Tugas 2"],"classData":[{"name":"X DKV 1","waliKelas":"Suhardi, S.Pd.","students":[{"name":"AN NISA KUSUMA MELATI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ANANDA MIFTAHULHUDA PRADANA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ANGEL LISA BEARNANDA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ARIF DAFFAA RIFQI PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ARZELA TASYA ALNASYIFA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ATRESIA CANTIKA DEWI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AULIA IBRAHIM","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AULIAH HAWA RAMADHANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AVRIZHA KEYZHA ARZELLA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"CALLISTA NINDIA PUTRI","uh":["84","",""],"tugas":["",""],"semester":""},{"name":"CHOLIS ALI NAZAM","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DINDA KEYLA WAHYUNINGTYAS","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DISVITA PUTRI ANDINI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ELSA ESTU ROMA VELINA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FEBRIAN TIRTA ASSIDDIQ","uh":["","",""],"tugas":["",""],"semester":""},{"name":"GILANG YOGA PRASETYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HAQKI NUR CAHYANTI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ITA UNZILA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KANAYA NISA SALSABILA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"LAILL ATASSYA MARRORA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"LATIVA OKTAVIA RULMANSYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD TIRTA PRAMULYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NAILA SALWA SALSABILA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NAUFAL AQIL KHAFI RAEYHAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NISA AULIA MAHMUDAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PRASASTI AGUSTINA MUSTIKAWATI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PRINCESSA NAFIAH ARIZAL","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PUTRI ARBA'ATUN QUROTA AYUNI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RATNA ANGGUN EVINSYA LAILA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"REVA SALYA SOLINOV","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"REVI MARISKHA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RODHIATUL HUSNNA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SAYYIDAH SHOFIAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"VANESA PRATAMA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"VANNESA DEVANIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ZAHVIRA KHOLIFAH NURHIDAYAH","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"1","kktp":75,"totalSiswa":36},{"name":"X DKV 2","waliKelas":"Wuri Ambarwati, S.Kom","students":[{"name":"AFIF FACHRI WIBOWO","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"AMELIA PUTRI AYATUL HUSNA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AMELLIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ANGGELLYCA PRASETYA","uh":["88","",""],"tugas":["",""],"semester":""},{"name":"ANGGUN DWI YANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AQELLA PUTRI KHOIRUN NISA","uh":["80","",""],"tugas":["",""],"semester":""},{"name":"BIMA SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"CHEYFFA AULIN HARYTASARI","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"CINTA REHALITA PUTRI RAGIL","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DANIEQ DWI SUJIATI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DIANA NAZWA SYIFA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"EDGAR BAYU ALDLY KUSUMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FATHUR AJI MUBAROK","uh":["","",""],"tugas":["",""],"semester":""},{"name":"GISKA ANGGRAINI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ICHDA HAFISA","uh":["82","",""],"tugas":["",""],"semester":""},{"name":"IMELDA AYU FITRI PITALOKA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"INDAH BUDIARTI","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"INIS SEPTIAN AMELIA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ISTIAZAH CALISTA WINDA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KHARISMA BINTANG SYAFIRA","uh":["82","",""],"tugas":["",""],"semester":""},{"name":"LUTHFI INAYATUL LAILI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MONIKA NUR AZIZAH","uh":["82","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD ZIDAN LATIF","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NADIA NURUL FATIMAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NICI NASELIA PUTRI ANGGRAENI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NIDIA TARIA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NOVITA NUR ZARAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"REVI WISMA LANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"REYHAN KHAIRUL ZIHNI","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"SAFARUL DINIA","uh":["82","",""],"tugas":["",""],"semester":""},{"name":"SALWA EKA NURJANAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SELY RETNO WATI","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"SHERLY KUMALA DEWI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SINTIA NUR AINI","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"TESIS NUR HASNA","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"UNZILA BERLIANA NUR AINI","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"1","kktp":75,"totalSiswa":36},{"name":"X DKV 3","waliKelas":"Ferna Triyanti, S.Psi.","students":[{"name":"ADYTYA RIZKI RAMADHAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AHMAD DIAS WIJAYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALLINCIA NATALI","uh":["84","",""],"tugas":["",""],"semester":""},{"name":"ALYA PUTRI ANJANI","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"ANDINY ELSA PUTRY","uh":["88","",""],"tugas":["",""],"semester":""},{"name":"ANNISA MUKHAROMAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AUDREY MEUTIARA ODELIA FATYAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AULIA SUAIBATHUL HAQIM","uh":["88","",""],"tugas":["",""],"semester":""},{"name":"AURA NIRMALA NAZILA","uh":["84","",""],"tugas":["",""],"semester":""},{"name":"AYU SITA LARASATI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"CHANG LEVINDY OCTAVIA","uh":["84","",""],"tugas":["",""],"semester":""},{"name":"DEWI LIA NUR FAIZAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DIAN AYUK SUSILOWATI","uh":["90","",""],"tugas":["",""],"semester":""},{"name":"ELIA RAYA SUNRISE","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FELISYA PUTRI ARNAN DITA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HANAFI KHOYRUL ZAHRA","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"HANNY NURMALA","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"KHONSAU SHOLIHAH","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"KUNCORO DEWA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"LENI OKTA WULAN DARI","uh":["84","",""],"tugas":["",""],"semester":""},{"name":"MEISYA ARDHANIA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MELANI EKA ARNI SAFITRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD FAUZAN NUR SYAKIB","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD REIHAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NAYSA PUTRI PUSPITASARI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAHMA DANI SEPTIANA","uh":["82","",""],"tugas":["",""],"semester":""},{"name":"RENI AYU PERMATA SARI","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"RIRIN APRILLLIANTI SASKIA","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"SAFHA ALLIYA TURROHMAH","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"SAFINA DWI MURNI NURANJANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SELLA NUR OKTAFIANA","uh":["84","",""],"tugas":["",""],"semester":""},{"name":"SILVIA MAWARDHANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SILVIA YAHYA RAMADHANI","uh":["80","",""],"tugas":["",""],"semester":""},{"name":"STYFANI SABILA KHOIRIYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"VICKY KURNIA ARDIANSYAH","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"1","kktp":75,"totalSiswa":35},{"name":"X TAB 1","waliKelas":"Sigid Tri Handoyo, ST","students":[{"name":"ADITIYA EKA SAPUTRA","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"AFRIAN NUR MUSTOVA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AKBAR MAULANA IBRAHIM","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ARDYANTAMA SETYOBUDI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AYMICHO FAHMI YURANO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AZZAHRA KANAYA JULI RAHMAWATI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"BINTANG ALFISYAHRIN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DELVIN ZULFIAN AMADZYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DICKY FEBIAN TRIWINANDA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DICKY SETIAWAN","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"ELVIN MUHAMMAD AGIL SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"EXCEL BEVERLEY ALFA PANGENDA","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"FADLAL ABI NAZARO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FAREL IBNU HANAFI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FERNANDO WAHYU SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"GALANG EKA SETYAWAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HANAFI HIDAYATULLOH","uh":["90","",""],"tugas":["",""],"semester":""},{"name":"KHAIRUL DANANG SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KHOIRUL UMAM","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KUMARA YUANINDYA ARDHANI","uh":["80","",""],"tugas":["",""],"semester":""},{"name":"LATIF SAPUTRA ARDIANSYAH","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"LEONARD RUSLAN HARTAWAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMAD ALVIN KURNIAWAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD DAMAR KUMOLOJATI","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD FIKRI ARDIYANSYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NABILA FAWAZI MAHARANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NASIR JANGKUNG NUGROHO","uh":["80","",""],"tugas":["",""],"semester":""},{"name":"NAZRIEL ILHMA RAMADHAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NUHA AL FIRDAUS","uh":["84","",""],"tugas":["",""],"semester":""},{"name":"RAFHA FAHRIZKY","uh":["","",""],"tugas":["",""],"semester":""},{"name":"REZA AMELIA KANA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"REZA OCTA WIJAYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RIZKY PRATAMA SETYA ADHI","uh":["92","",""],"tugas":["",""],"semester":""},{"name":"ROHIM SURO KUMOLO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RYAN SYAHPUTRA","uh":["90","",""],"tugas":["",""],"semester":""},{"name":"SATRIA NUGRAHA","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"1","kktp":75,"totalSiswa":36},{"name":"X TAB 2","waliKelas":"Pakarti Arum Kinasih, S.Pd","students":[{"name":"ADI NUGROHO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AHMAD HAKIM FIRDAUS","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALEXA ARKABYAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALVIANO KEISHA PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALVIN PUTRA WIDIANSYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALVINO GILANG YULIYANTO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ANDHIKA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ANGGA SAPUTRO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ARKANANTA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"CHIKO AMELIO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DAMAR DEMADA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DAVIAN VANDEZTA FUAD","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DIRLY ADITYA SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"EDGAR NAUFAL CHESTARAFIF","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ERICK MORALES","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FAUZI HAFIDZ","uh":["","",""],"tugas":["",""],"semester":""},{"name":"GEOVANNY PRASTYO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HASSAN NURWI HUDA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KHANSA NAUFAL JULIANO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"LENATAN ZIQRI MAULANA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MIKO WILIANTORO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD KHOIRUL ANAM","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NOAH ADILIA PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PURNAMA ARDIAN PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAFA ADITYA YAHYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAFI AHMAD MUSTHOFA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"REYNARD NOHAN ARDIRIANTO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"REZHA SETYO NUGROHO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RIZKI NUGROHO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RIZKY AL MUZAKI MUSTHOFA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ROHMAT WAHYU SAPUTRO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"UMAR AL FARUQ","uh":["","",""],"tugas":["",""],"semester":""},{"name":"VAZHEL QAUZAN DEVIZCHAR","uh":["","",""],"tugas":["",""],"semester":""},{"name":"WILDAN AZZAM HANIF","uh":["","",""],"tugas":["",""],"semester":""},{"name":"WONGALICK G'ANDREW HERJUNO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"YANUAR FIERMANSYAH","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"1","kktp":75,"totalSiswa":36},{"name":"X TBSM 1","waliKelas":"Erlinda Dihan P., S.Pd","students":[{"name":"AHMAD HABIBI HOSAIN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALAN DWI RIZKY","uh":["98","",""],"tugas":["",""],"semester":""},{"name":"ALFIANO MARVEL SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALIF TEGAR AL AZZAM","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"ALVIAN RIDHO MAULANA","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"ARLISA EKA PUTRI","uh":["100","",""],"tugas":["",""],"semester":""},{"name":"ARSHAND AFNANDA HUTOMO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"BANGKIT SAKTIAWAN","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"BAYU WARDANI","uh":["88","",""],"tugas":["",""],"semester":""},{"name":"BRIAN LANA SYAHPUTRA","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"BRILIANT FADLAN YASHIR","uh":["88","",""],"tugas":["",""],"semester":""},{"name":"CHANDRA LIE WIJAYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"CHELSEA ARTIKA QORI SANYARIVA","uh":["100","",""],"tugas":["",""],"semester":""},{"name":"DEOFAN SATRYAALDIANSYAH","uh":["96","",""],"tugas":["",""],"semester":""},{"name":"DEVI PRAMESTI","uh":["100","",""],"tugas":["",""],"semester":""},{"name":"FAHREZA ILHAM PUTRA","uh":["88","",""],"tugas":["",""],"semester":""},{"name":"FAIS ANGGA ROMADHONI","uh":["88","",""],"tugas":["",""],"semester":""},{"name":"FELLIN TRISNANING TIYAS","uh":["98","",""],"tugas":["",""],"semester":""},{"name":"GIDEON ANATH CRISTIAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HARIYANTO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"IMRON JAMALUDIN","uh":["92","",""],"tugas":["",""],"semester":""},{"name":"INTAN PRATIWI","uh":["100","",""],"tugas":["",""],"semester":""},{"name":"LUTFHI PRATAMA PUTRA SUHARTO","uh":["96","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD ADIIB WIDYOKO","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD KHOIRUL ANAM","uh":["76","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD RAFA PUTRA HANANTA","uh":["94","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD RAFA SEPTYAWAN","uh":["86","",""],"tugas":["",""],"semester":""},{"name":"MUKTI WIDODO","uh":["82","",""],"tugas":["",""],"semester":""},{"name":"NADITO FADILAH HUTOMO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NOVITA ANJEL LINA PUTRI","uh":["100","",""],"tugas":["",""],"semester":""},{"name":"PRATAMA NAZILA QURANIAWAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PUJO NUGROHO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAFI AL AZIIZ","uh":["82","",""],"tugas":["",""],"semester":""},{"name":"REZKY TRIYOGA PAMUNGKAS","uh":["100","",""],"tugas":["",""],"semester":""},{"name":"RHIDWAN ADYTIA NUR MUSTAKHIM","uh":["78","",""],"tugas":["",""],"semester":""},{"name":"YUSUF","uh":["100","",""],"tugas":["",""],"semester":""}],"mapelId":"2","kktp":75,"totalSiswa":36},{"name":"X TBKR","waliKelas":"Abdul 'Aziz Manggala Saputra, S.Pd.","students":[{"name":"ABIYYI AHMAD KHOIRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ADITYA PRASETIAWAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AFIF ALI PRADANA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALDO WAHYU ARDYANSYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ALVIN WAHYU HARIYANTO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ANANDA GHANY EL-RASYID","uh":["","",""],"tugas":["",""],"semester":""},{"name":"BAGUS BUDIARTO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"BAGUS PUTRA PAMUNGKAS","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DESTA BAYU SAPUTRO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DIDIN VIA PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DIMAS ANANDA JADI PRASETYO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FARHAN KURNIAWAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FARISA ARDIYANSHA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FERDYAN AHMAD SYAIFUL MAULANA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"GEMPAR PANGESTU","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HAFIDZ LUTHFIYYAH PRAMUGI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ISHAK AHMAD JUNAIDI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"JALU AIRLANGGA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KINAN ADITYA RAMADHAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MARCEL GUNTUR SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMAD ALFINNO PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD DENI SAPUTRA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD FATKHUR ROHMAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NEVAN FABIAN ARDHANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NIZAM MUSTOFA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAFA ARDINO PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAFHA ALFIANO MARGANA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAJENDRA VAUREL SULTON AULIA SADEWA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAVY MIFTAKHUL KHASAN SAYFUL JIHAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ROJER ANUGRAH DWI ADITIYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SAFIK ROHIDAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"TEGAR ADITYA PRAYOGA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"WAHED BUDIANTO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"YUDHA AZAM ERYANTO","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"2","kktp":75,"totalSiswa":34},{"name":"XI DKV 1","waliKelas":"Afifatul Khoiriyah, S.Pd","students":[{"name":"ADILA RIFTI RAHAYU","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AISYAH NURUL QOMARIYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"APRILIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AVIN AULIA OKTAVIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AYRA SUCI RAMADANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"BIMA ADI TAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ELSA SALSABILA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FATIN SEPTI RAHAYU","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FINAKA PUTRI ZAALIKA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FISTANIA ALFARISZA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HANIFAH LUTFI ISTIQOMAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KALISTA EFELINA KAIRANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"KHEYZA BUNGA ARUNNA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MICHELLE NAOMIRA ABIGAIL","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMAD IRSYAD","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MUHAMMAD RAFIF AL HAFIDZ","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NADIN DISTA RISMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NATASYA PUTRI APRILIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NATHASYIA YULIANA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"OCTAVIA MARA KUSUMA DEWI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"OKTAVIA APRATSYIN MAYSYAROH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PUAN MAHARANI PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PUPUT MUTHMAINNAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAYA DINAR APRILIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RIZA DWI SAPUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SARILA DWI PRAPTIWI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SILVIA ANGGRAINI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"TIARA RIDHA OKTAVIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"TIFATUL MARLINA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"UMI NURJANNAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"VIANIKHA DYAHESTU WARDHANY","uh":["","",""],"tugas":["",""],"semester":""},{"name":"WAHYUNI NUR AINI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"WILDAN PUTRA PRAYOGA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"YULIA ASTUTI RUKMANA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ZIVILIA AUREL FADHILA","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"2","kktp":75,"totalSiswa":35},{"name":"XI DKV 3","waliKelas":"Firmansyah Nur Utomo, S.Pd.","students":[{"name":"ABEL CLAUDYA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ASRI NUR KHASANAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AULIA DWI NOVYANTI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AULIA NASHWA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AVRILIANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"AZIDA AULIA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DEVIAN RAMADHANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DEVITA AWLIYAWURI RAMADANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"DWI AGUSTINNA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"FERDI TOBI ARIYANTO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HABZAH OKTAVIA DEWI ZAHRANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"HEPPY ROHMATUL HIDAYAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"INDAH BUNGA LESTARI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"ISNAINI DEWI LESTARI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"JELITA ZAHRANI PRATAMA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"LINTANG PUTRI PASHA","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MARSHA RAGIL PRATIWI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MELISA ANESA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"METTALEA PUTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"MIFTHA PUTRI WARDANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"NOVITA CYNTIA LARASWATI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"OLIVIA KARIN DWI VANTOMI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"PIPIT TANIA RAHMAT DANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RAHMAN AKAL LISAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RESKI EVI DARYANTI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"RICHARD DJUAN PRASETYO MANAO","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SALMA NUR KHASANAH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SEKAR ARUM","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SENTA REGINA ARILIANI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SHOLEHAN NUR IMAN","uh":["","",""],"tugas":["",""],"semester":""},{"name":"SILFINA DAMAYANTI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"TIARA KALYANA TANTRI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"TIARA NAFA WIJAYANTI","uh":["","",""],"tugas":["",""],"semester":""},{"name":"WANDA EKA FARININGSIH","uh":["","",""],"tugas":["",""],"semester":""},{"name":"YUNITA ZASKYA ADYAMECA","uh":["","",""],"tugas":["",""],"semester":""}],"mapelId":"3","kktp":75,"totalSiswa":35}]}}</script>
+<script id="baked-data" type="application/json">null</script>
 
 <script>
 const BASE_KEY='smkn1gondang_nilai_data';
@@ -726,7 +733,7 @@ function saveGasUrl() {
   lsSet(GAS_URL_KEY, gasUrl);
   autoSave();
   closeGasModal();
-  updateSyncStatus(gasUrl ? '🌐 Sync: Terhubung' : '🌐 Sync: Ready', gasUrl ? '#27ae60' : '#2980b9');
+  updateQueueDisplay();
   if (gasUrl) syncCurrentClassToGas();
 }
 
@@ -816,9 +823,9 @@ async function testGasConnection() {
   }
 }
 
-async function syncCurrentClassToGas() {
+function queueClassSync(classIndex) {
   if (!gasUrl) return;
-  const classPayload = getPrintFormatDataForClass(currentClass);
+  const classPayload = getPrintFormatDataForClass(classIndex);
   const payload = {
     action: 'sync',
     className: classPayload.className,
@@ -826,32 +833,27 @@ async function syncCurrentClassToGas() {
     rows: classPayload.rows,
     timestamp: new Date().toISOString()
   };
+  queueGasSync(payload);
+}
 
-  if (typeof navigator !== 'undefined' && !navigator.onLine) {
-    queueGasSync(payload);
-    updateSyncStatus('📶 Offline (Antrean ' + gasQueue.length + ')', '#d35400');
-    return;
+function queueAllClassesSync() {
+  if (!gasUrl) return;
+  for (let i = 0; i < classData.length; i++) {
+    const classPayload = getPrintFormatDataForClass(i);
+    const payload = {
+      action: 'sync',
+      className: classPayload.className,
+      headers: classPayload.headers,
+      rows: classPayload.rows,
+      timestamp: new Date().toISOString()
+    };
+    gasQueue.push(payload);
   }
-
-  try {
-    updateSyncStatus('🌐 Menyinkronkan...', '#f39c12');
-    const res = await fetch(gasUrl, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (data && data.status === 'success') {
-      updateSyncStatus('✓ Sync Spreadsheet', '#27ae60');
-    } else {
-      queueGasSync(payload);
-      updateSyncStatus('⚠️ Sync Ditunda', '#d35400');
-    }
-  } catch (e) {
-    queueGasSync(payload);
-    updateSyncStatus('📶 Offline Sync Saved', '#d35400');
-  }
+  const map = new Map();
+  gasQueue.forEach(item => map.set(item.className, item));
+  gasQueue = Array.from(map.values());
+  lsSet(GAS_QUEUE_KEY, JSON.stringify(gasQueue));
+  updateQueueDisplay();
 }
 
 function queueGasSync(payload) {
@@ -860,43 +862,143 @@ function queueGasSync(payload) {
   gasQueue.forEach(item => map.set(item.className, item));
   gasQueue = Array.from(map.values());
   lsSet(GAS_QUEUE_KEY, JSON.stringify(gasQueue));
+  updateQueueDisplay();
 }
 
-async function processGasQueue() {
-  if (typeof navigator !== 'undefined' && !navigator.onLine) return;
-  if (!gasUrl || !gasQueue.length) return;
-  updateSyncStatus('🔄 Sending Offline Queue...', '#2980b9');
-  const queue = [...gasQueue];
-  gasQueue = [];
-  lsSet(GAS_QUEUE_KEY, JSON.stringify(gasQueue));
+function updateQueueDisplay() {
+  if (!gasUrl) {
+    updateSyncStatus('🌐 Sync: Belum Dihubungkan', '#7f8c8d');
+    return;
+  }
+  const isOnline = typeof navigator === 'undefined' || navigator.onLine !== false;
+  if (!isOnline) {
+    if (gasQueue.length > 0) {
+      updateSyncStatus(`📶 Offline (${gasQueue.length} kelas tertunda · tunggu internet)`, '#d35400');
+    } else {
+      updateSyncStatus('📶 Offline (Semua data tersimpan lokal)', '#7f8c8d');
+    }
+  } else {
+    if (gasQueue.length > 0) {
+      updateSyncStatus(`🔄 Antrean: ${gasQueue.length} kelas tertunda...`, '#e67e22');
+    } else {
+      updateSyncStatus('✓ Tersinkron ke Spreadsheet', '#27ae60');
+    }
+  }
+}
 
-  for (const item of queue) {
+let isSyncingQueue = false;
+
+async function processGasQueue() {
+  if (!gasUrl || !gasQueue.length) {
+    updateQueueDisplay();
+    return;
+  }
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+    updateQueueDisplay();
+    return;
+  }
+  if (isSyncingQueue) return;
+  isSyncingQueue = true;
+
+  updateSyncStatus(`🔄 Menyinkronkan ${gasQueue.length} kelas...`, '#2980b9');
+  const queueToProcess = [...gasQueue];
+  const remaining = [];
+
+  for (let i = 0; i < queueToProcess.length; i++) {
+    const item = queueToProcess[i];
     try {
-      await fetch(gasUrl, {
+      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const timeoutId = controller ? setTimeout(() => controller.abort(), 12000) : null;
+      const fetchOpts = {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(item)
-      });
+      };
+      if (controller) fetchOpts.signal = controller.signal;
+
+      const res = await fetch(gasUrl, fetchOpts);
+      if (timeoutId) clearTimeout(timeoutId);
+
+      const data = await res.json();
+      if (!data || data.status !== 'success') {
+        remaining.push(item);
+      }
     } catch (e) {
-      queueGasSync(item);
+      remaining.push(item);
     }
   }
-  if (!gasQueue.length) {
-    updateSyncStatus('✓ Sync Spreadsheet', '#27ae60');
-  } else {
-    updateSyncStatus('📶 Antrean Sync (' + gasQueue.length + ')', '#d35400');
+
+  // Gabungkan remaining dengan item baru yang mungkin masuk saat loop
+  const currentMap = new Map();
+  remaining.forEach(item => currentMap.set(item.className, item));
+  gasQueue.forEach(item => {
+    if (!queueToProcess.some(processed => processed.className === item.className)) {
+      currentMap.set(item.className, item);
+    }
+  });
+  gasQueue = Array.from(currentMap.values());
+  lsSet(GAS_QUEUE_KEY, JSON.stringify(gasQueue));
+
+  isSyncingQueue = false;
+  updateQueueDisplay();
+}
+
+async function syncCurrentClassToGas() {
+  if (!gasUrl) return;
+  queueClassSync(currentClass);
+  await processGasQueue();
+}
+
+async function syncAllClassesToGas() {
+  if (!gasUrl) {
+    alert('⚠️ Harap masukkan dan simpan Web App URL Google Apps Script terlebih dahulu di menu Koneksi Google Spreadsheet.');
+    return;
   }
+  flushSave();
+  queueAllClassesSync();
+  const isOnline = typeof navigator === 'undefined' || navigator.onLine !== false;
+  if (!isOnline) {
+    alert(`📶 Mode Offline: Perubahan semua kelas (${gasQueue.length} kelas) telah disimpan ke antrean offline.\n\nSistem akan otomatis menyinkronkan data ke Google Spreadsheet saat perangkat kembali terhubung ke internet.`);
+    return;
+  }
+  await processGasQueue();
+}
+
+function manualTriggerSync() {
+  if (!gasUrl) {
+    openGasModal();
+    return;
+  }
+  flushSave();
+  queueClassSync(currentClass);
+  processGasQueue();
 }
 
 if (typeof window !== 'undefined') {
   window.addEventListener('online', () => {
-    updateSyncStatus('🌐 Online', '#27ae60');
+    updateSyncStatus('🌐 Online · Memulai sinkronisasi...', '#27ae60');
     processGasQueue();
   });
   window.addEventListener('offline', () => {
-    updateSyncStatus('📶 Offline Mode', '#d35400');
+    updateQueueDisplay();
   });
+  window.addEventListener('focus', () => {
+    if (typeof navigator === 'undefined' || navigator.onLine !== false) {
+      processGasQueue();
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && (typeof navigator === 'undefined' || navigator.onLine !== false)) {
+      processGasQueue();
+    }
+  });
+  // Heartbeat interval 15 detik untuk auto-retry antrean offline
+  setInterval(() => {
+    if (gasUrl && gasQueue.length > 0 && (typeof navigator === 'undefined' || navigator.onLine !== false)) {
+      processGasQueue();
+    }
+  }, 15000);
 }
 
 function collectAppState(mode='full'){
@@ -925,7 +1027,7 @@ function loadData(){
       setMapelValue(p.mapel);setKktpValue(p.kktp??75);
       document.getElementById('guru').value=p.guru??'[Nama Anda, S.Pd.]';
       document.getElementById('semester').value=p.semester??'Semester Gasal';
-      document.getElementById('tahun').value=p.tahun??'2026/2027'; gasUrl=p.gasUrl||lsGet(GAS_URL_KEY)||''; try{gasQueue=JSON.parse(lsGet(GAS_QUEUE_KEY)||'[]');}catch(e){gasQueue=[];} if(gasUrl) updateSyncStatus('🌐 Sync: Terhubung','#27ae60');
+      document.getElementById('tahun').value=p.tahun??'2026/2027'; gasUrl=p.gasUrl||lsGet(GAS_URL_KEY)||''; try{gasQueue=JSON.parse(lsGet(GAS_QUEUE_KEY)||'[]');}catch(e){gasQueue=[];} updateQueueDisplay();
       const idx=parseInt(p.currentClass);
       currentClass=(!isNaN(idx)&&idx>=0&&idx<classData.length)?idx:0;
     }catch(e){initEmptyData();setDefaultSelections();}
@@ -975,7 +1077,12 @@ function autoSave(){
   if(suppressAutoSave)return;
   clearTimeout(saveTimeout);
   document.getElementById('saveStatus').innerText='⏳ Menyimpan...';
-  saveTimeout=setTimeout(()=>{ flushSave(); syncCurrentClassToGas(); },400);
+  saveTimeout=setTimeout(()=>{
+    flushSave();
+    if(gasUrl){
+      syncCurrentClassToGas();
+    }
+  },400);
 }
 function flushSave(){clearTimeout(saveTimeout);try{saveCurrentClassData();saveData();}catch(e){console.error(e);}}
 function onSemesterInput(){syncPrintInfo();autoSave();}
@@ -1485,6 +1592,7 @@ function deleteStruktur(idx){
   flushSave();arr.splice(idx,1);
   classData.forEach(c=>(c.students||[]).forEach(s=>{if(s&&Array.isArray(s[kind]))s[kind].splice(idx,1);}));
   saveData();renderStrukturList();renderClass();updateStructureButtons();
+  if(gasUrl){queueAllClassesSync();processGasQueue();}
 }
 function addStruktur(){
   const kind=currentStrukturKind,arr=kind==='uh'?uhList:tugasList;
@@ -1494,6 +1602,7 @@ function addStruktur(){
   flushSave();arr.push(name);
   classData.forEach(c=>(c.students||[]).forEach(s=>{if(s&&Array.isArray(s[kind]))s[kind].push('');}));
   inp.value='';saveData();renderStrukturList();renderClass();updateStructureButtons();
+  if(gasUrl){queueAllClassesSync();processGasQueue();}
 }
 
 function openClassManager(){renderClassManagerList();const n=document.getElementById('newClassName'),w=document.getElementById('newClassWali');if(n)n.value='';if(w)w.value='';document.getElementById('classModal').classList.add('active');}
@@ -1570,18 +1679,24 @@ function saveEditClass(idx){
     suppressAutoSave=false;
   }
   renderClassManagerList();buildTabs();renderClass();syncPrintInfo();updateStructureButtons();saveData();
+  if(gasUrl){queueClassSync(idx);processGasQueue();}
 }
 function deleteClass(idx){
   if(classData.length===1){alert('Minimal harus ada 1 kelas.');return;}
   const c=classData[idx];
+  const deletedClassName=c.name;
   const filled=(c.students||[]).filter(s=>s&&s.name&&!s.name.startsWith('Siswa ')).length;
   let msg=`Hapus kelas "${c.name}"?`;
   if(filled)msg+=`\n\n⚠️ Ada ${filled} siswa dengan data nilai.`;
   if(!confirm(msg+'\n\nTidak bisa dibatalkan.'))return;
   flushSave();classData.splice(idx,1);
+  // Bersihkan antrean untuk kelas yang dihapus
+  gasQueue=gasQueue.filter(item=>item.className!==deletedClassName);
+  lsSet(GAS_QUEUE_KEY,JSON.stringify(gasQueue));
   if(currentClass>=classData.length)currentClass=classData.length-1;
   else if(currentClass>=idx)currentClass--;
   buildTabs();renderClass();saveData();renderClassManagerList();updateStructureButtons();
+  updateQueueDisplay();
 }
 function addClass(){
   const inp=document.getElementById('newClassName'),name=inp.value.trim();
@@ -1593,6 +1708,7 @@ function addClass(){
   classData.push({name,waliKelas,students:[],mapelId:document.getElementById('mapel').value,kktp:dk,totalSiswa:ds});
   currentClass=classData.length-1;inp.value='';if(wInp)wInp.value='';
   buildTabs();renderClass();saveData();renderClassManagerList();updateStructureButtons();
+  if(gasUrl){queueClassSync(currentClass);processGasQueue();}
 }
 
 const SISWA_PRESETS=[20,25,30,32,35,36,40];
@@ -1649,6 +1765,7 @@ function saveSiswaPerClass(){
     c.students=st;c.totalSiswa=n;
   });
   flushSave();updateStructureButtons();renderClass();closeSiswaManager();
+  if(gasUrl){queueAllClassesSync();processGasQueue();}
   alert('✓ Jumlah siswa per kelas berhasil diperbarui.');
 }
 
@@ -1820,7 +1937,9 @@ function importExcel(event){
       const ts=classData[currentClass].totalSiswa||DEFAULT_JUMLAH_SISWA;
       if(!confirm(`Kelas: ${classData[currentClass].name} (maks ${ts} siswa)\nDitemukan ${records.length} data siswa/nilai.\nLanjutkan import?`)){event.target.value='';return;}
       flushSave();const n=applyDataToClass(currentClass,records);
-      saveData();renderClass();alert(`✓ Import ${n} data siswa & nilai berhasil.`);
+      saveData();renderClass();
+      if(gasUrl){queueClassSync(currentClass);processGasQueue();}
+      alert(`✓ Import ${n} data siswa & nilai berhasil.`);
     }catch(err){alert('Gagal membaca file: '+err.message);}
     event.target.value='';
   };
@@ -1868,6 +1987,10 @@ function confirmMapping(){
     if(records.length){total+=applyDataToClass(ci,records);used.add(ci);}
   });
   saveData();buildTabs();renderClass();closeMappingModal();
+  if(gasUrl){
+    used.forEach(ci=>queueClassSync(ci));
+    processGasQueue();
+  }
   alert(`✓ Import berhasil: ${total} data di ${used.size} kelas.`);
 }
 function buildExportCols(){
@@ -2026,6 +2149,7 @@ function restoreData(event){
       currentClass=0;
       applyKktpFromCurrentClass();
       updateStructureButtons();saveData();buildTabs();renderClass();
+      if(gasUrl){queueAllClassesSync();processGasQueue();}
       alert('✓ Data berhasil di-restore.');
     }catch(err){alert('✗ Gagal membaca file: '+err.message);}
   };
@@ -2057,6 +2181,7 @@ function resetAllData(){
   if(sem)document.getElementById('semester').value=sem;
   if(thn)document.getElementById('tahun').value=thn;
   currentClass=0;updateStructureButtons();saveData();buildTabs();renderClass();closeResetModal();
+  if(gasUrl){queueAllClassesSync();processGasQueue();}
   alert(`✓ Data direset (${cnt} kelas × ${js} siswa default).`);
 }
 
@@ -2140,6 +2265,9 @@ async function initApp() {
   buildTabs();
   renderClass();
   updateBakedInfo();
+  if (gasUrl && (typeof navigator === 'undefined' || navigator.onLine !== false)) {
+    processGasQueue();
+  }
 }
 initApp();
 
@@ -2162,6 +2290,5 @@ document.addEventListener('click',function(e){
 });
 window.addEventListener('beforeunload',()=>{try{saveCurrentClassData();saveData();}catch(e){}});
 </script>
-
-
-</body></html>
+</body>
+</html>
